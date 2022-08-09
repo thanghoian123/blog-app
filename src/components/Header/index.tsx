@@ -1,23 +1,39 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
+import { auth, providers } from "../../firebase";
 import logo from "../../logo.png";
+import Avatar from "../Avatar";
 function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [user] = useAuthState(auth);
+
   return (
     <div className="bg-[#151F2A] px-6 h-16 flex items-center justify-between">
       <img src={logo} alt="logo" className="w-[100px]" />
 
-      <ul className={`list-none sm:absolute sm:bg-slate-400 sm:text-white sm:right-0 md:hidden duration-1000 z-0 text-white ${isNavOpen ?`top-16` : `top-[-1000px]`}`}>
-        <li className="px-6 font-semibold text-[17px] hover:opacity-50">Home</li>
-        <li className="px-6 font-semibold text-[17px] hover:opacity-50">About us</li>
-        <li className="px-6 font-semibold text-[17px] hover:opacity-50">Feature</li>
-        <li className="px-6 font-semibold text-[17px] hover:opacity-50">Contact us</li>
+      <ul className={`list-none sm:absolute sm:bg-slate-400 sm:text-white sm:right-0 md:hidden duration-1000 z-0 text-white ${isNavOpen ? `top-16` : `top-[-1000px]`}`}>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Home</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">About us</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Manage</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Contact us</li>
       </ul>
 
       <ul className={`list-none md:flex text-white sm:hidden`}>
-        <li className="px-6 font-semibold text-[17px]">Home</li>
-        <li className="px-6 font-semibold text-[17px]">About us</li>
-        <li className="px-6 font-semibold text-[17px]">Feature</li>
-        <li className="px-6 font-semibold text-[17px]">Contact us</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer">Home</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer">About us</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer">Manage</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer">Contact us</li>
+        {!user ? <li className="px-6 font-semibold text-[17px] cursor-pointer" onClick={() => {
+          providers.signInWithGoogle()
+        }}>Sign in</li> : <li className="flex px-6 font-semibold text-[17px] cursor-pointer">
+          <p className="mr-1" onClick={providers.logout}>Sign out</p>
+          <Avatar
+            src={user?.photoURL as string}
+          />
+        </li>}
+
+
       </ul>
 
       <ul

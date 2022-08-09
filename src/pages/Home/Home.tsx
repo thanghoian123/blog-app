@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import CardBox from "../../components/CardBox/CardBox";
 import CardStack from "../../components/CardBox/CardStack";
+import Button from "../../components/FormComponent/Button";
 import Loader from "../../components/Loader";
 import Section from "../../components/Section";
 import { ETag, Tag } from "../../components/tag";
@@ -11,7 +12,8 @@ import { AuthContext } from "../../context/Auth/AuthProvider";
 import { getRandomOptions } from "../../helper/randomAvatar";
 import { fetchNextPostRequest, fetchPostRequest } from "../../saga/action";
 import { RootState } from "../../saga/reducers/reducer";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, providers } from "../../firebase";
 export interface IPost {
   comments: any;
   content: string;
@@ -26,9 +28,6 @@ function Home() {
   const { posts, lastKey, pending } = useSelector(
     (state: RootState) => state.posts
   );
-
-  const { auth } = useContext(AuthContext);
-  console.log("🚀 ~ file: Home.tsx ~ line 32 ~ Home ~ auth", auth);
 
   const dispatch = useDispatch();
 
