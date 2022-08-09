@@ -2,6 +2,7 @@ import { convertToRaw, EditorState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { memo, useCallback, useState } from "react";
 import TextEditor from "../../components/Editor";
+import FileInput from "../../components/FileInput";
 import Button from "../../components/FormComponent/Button";
 import FormItem from "../../components/FormComponent/FormItem";
 import TextField from "../../components/FormComponent/TextField";
@@ -10,6 +11,7 @@ const ManagePage = memo(() => {
     editorState: EditorState.createEmpty(),
     contentData: "",
     title: "",
+    thubnail: "",
   });
 
   const onEditorStateChange = useCallback(
@@ -50,6 +52,10 @@ const ManagePage = memo(() => {
                 setPostData({ ...postData, title: e.target.value });
               }}
             />
+          </FormItem>
+
+          <FormItem id="thubmnail" label="Thubmnail" required classWrap="mb-4">
+           <FileInput/>
           </FormItem>
 
           <TextEditor

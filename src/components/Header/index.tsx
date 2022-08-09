@@ -13,16 +13,16 @@ function Header() {
       <img src={logo} alt="logo" className="w-[100px]" />
 
       <ul className={`list-none sm:absolute sm:bg-slate-400 sm:text-white sm:right-0 md:hidden duration-1000 z-0 text-white ${isNavOpen ? `top-16` : `top-[-1000px]`}`}>
-        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Home</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50"><Link to="/">Home</Link></li>
         <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">About us</li>
-        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Manage</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50"><Link to="postEditor">Manage</Link></li>
         <li className="px-6 font-semibold text-[17px] cursor-pointer hover:opacity-50">Contact us</li>
       </ul>
 
       <ul className={`list-none md:flex text-white sm:hidden`}>
-        <li className="px-6 font-semibold text-[17px] cursor-pointer">Home</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer"><Link to="/">Home</Link></li>
         <li className="px-6 font-semibold text-[17px] cursor-pointer">About us</li>
-        <li className="px-6 font-semibold text-[17px] cursor-pointer">Manage</li>
+        <li className="px-6 font-semibold text-[17px] cursor-pointer"><Link to="postEditor">Manage</Link></li>
         <li className="px-6 font-semibold text-[17px] cursor-pointer">Contact us</li>
         {!user ? <li className="px-6 font-semibold text-[17px] cursor-pointer" onClick={() => {
           providers.signInWithGoogle()
